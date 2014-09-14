@@ -1,5 +1,25 @@
 <html>
     <body>
-    	<h1>Today I will</h1>
+    	<script src="https://cdn.auth0.com/w2/auth0-widget-5.2.min.js"></script>
+<script type="text/javascript">
+	
+  var widget = new Auth0Widget({
+    domain:         'dps.auth0.com',
+    clientID:       'dY5m11TDM2LDO2L0oQyTdyjwPbYcuRwU',
+    callbackURL:    'http://fierce-everglades-9308.herokuapp.com/callback'
+  });
+  
+</script>
+
+{% if user %}
+<div>
+  <img class="avatar" src="{{user['picture']}}"/>
+  <h2>Welcome {{user['nickname']}}</h2>
+</div>
+{% else %}
+<button onclick="widget.signin({ scope: 'openid profile' })">Login</button>
+{% endif %}
+
+    	<h1>Today I will <input name='tiw'></input></h1>
 	</body>
 </html>
