@@ -6,6 +6,7 @@ from flask import Flask, request, jsonify, session, redirect, render_template, s
 
 app = Flask(__name__)
 app.debug = True
+app.secret_key = env["FLASK_SECRET_KEY"]
 
 je = json.JSONEncoder()
 
