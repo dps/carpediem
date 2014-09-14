@@ -28,7 +28,7 @@ class RedisBackend(object):
   	return self._instance + ':user:' + user['email'] + ':' + key
 
   def ensure_user(self, user):
-    self.maybe_enroll_user(self, user)
+    self.maybe_enroll_user(user)
 
   def maybe_enroll_user(self, user):
     if self._redis.exists(self._key_user(user, 'email')):
