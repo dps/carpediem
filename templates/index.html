@@ -15,7 +15,10 @@
 <div>
   <img class="avatar" src="{{user['picture']}}"/>
   <h2>Welcome {{user['nickname']}}</h2> <a href="https://dps.auth0.com/logout">Logout</a>
+  
+  <h3>Don't keep this in the page - it's a security issue - just so you can see what you get:</h3>
   {{ user }}
+
 </div>
 {% else %}
 <button onclick="widget.signin({ scope: 'openid profile' })">Login</button>
