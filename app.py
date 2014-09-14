@@ -3,6 +3,7 @@ import os
 import redis
 import requests
 from flask import Flask, request, jsonify, session, redirect, render_template, send_from_directory
+from redisbackend import RedisBackend
 
 app = Flask(__name__)
 app.debug = True
@@ -10,15 +11,13 @@ app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 je = json.JSONEncoder()
 
-class Backend(object):
+appredis = redis.redis.StrictRedis(
+    host=os.environ['REDIS_HOST'], 
+    port=9148, 
+    db=0,
+    password=os.environ['REDIS_KEY'])
 
-    def __init__(self):
-        pass
-
-    def tiw_by_id(self, tiw_id):
-        return {'id': tiw_id, 'user': 'simon', 'text': 'make a website!', 'done': False}
-
-backend = Backend()
+backend = RedisBackend(appredis, 'carpe_test')
 
 @app.route('/callback')
 def callback_handling():
@@ -55,6 +54,7 @@ def requires_auth(f):
     if not session.has_key('profile'):
       # Redirect to Login page here
       return redirect('/')
+    backend.ensure_user(session['profile'])
     return f(*args, **kwargs)
 
   return decorated
@@ -70,6 +70,7 @@ def index():
   user = None
   if session.has_key('profile'):
     user = session['profile']
+  backend.ensure_user(user)
   return render_template('index.html', user=user)
 
 @app.route('/tiw/<tiw_id>')
