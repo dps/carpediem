@@ -47,8 +47,7 @@ def callback_handling():
   session['profile'] = user_info
 
   # Redirect to the User logged in page that you want here
-  # In our case it's /dashboard
-  return redirect('/dashboard')
+  return redirect('/')
 
 def requires_auth(f):
   @wraps(f)
