@@ -13,7 +13,7 @@ je = json.JSONEncoder()
 
 appredis = redis.redis.StrictRedis(
     host=os.environ['REDIS_HOST'], 
-    port=9148, 
+    port=9148,
     db=0,
     password=os.environ['REDIS_KEY'])
 
