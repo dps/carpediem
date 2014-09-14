@@ -70,7 +70,7 @@ def index():
   user = None
   if session.has_key('profile'):
     user = session['profile']
-  return render_template('index.html', user=user)
+  return render_template('index.html', user=user, server=os.environ["SERVER_NAME"])
 
 @app.route('/tiw/<tiw_id>')
 def permalink(tiw_id):
