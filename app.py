@@ -70,7 +70,7 @@ def index():
   user = None
   if session.has_key('profile'):
     user = session['profile']
-  backend.ensure_user(user)
+    backend.ensure_user(user)
   return render_template('index.html', user=user)
 
 @app.route('/tiw/<tiw_id>')
