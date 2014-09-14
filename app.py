@@ -67,9 +67,15 @@ def api_get_by_id(tiw_id):
 
 @app.route('/')
 def index():
-  return render_template('index.html', user=session['profile'])
+  user = None
+  if session.has_key('profile'):
+    user = session['profile']
+  return render_template('index.html', user=user)
 
 @app.route('/tiw/<tiw_id>')
 def permalink(tiw_id):
+  user = None
+  if session.has_key('profile'):
+    user = session['profile']
   tiw = backend.tiw_by_id(tiw_id)
-  return render_template('permalink.html', tiw=tiw, user=session['profile'])
+  return render_template('permalink.html', tiw=tiw, user=user)
