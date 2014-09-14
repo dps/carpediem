@@ -11,7 +11,7 @@ app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 je = json.JSONEncoder()
 
-appredis = redis.redis.StrictRedis(
+appredis = redis.StrictRedis(
     host=os.environ['REDIS_HOST'], 
     port=9148,
     db=0,
