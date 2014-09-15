@@ -69,7 +69,6 @@ def index():
   user = None
   if session.has_key('profile'):
     user = session['profile']
-    print user
     backend.ensure_user(user)
   return render_template('index.html', user=user)
 
