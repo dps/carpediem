@@ -54,7 +54,6 @@ def requires_auth(f):
     if not session.has_key('profile'):
       # Redirect to Login page here
       return redirect('/')
-    backend.ensure_user(session['profile'])
     return f(*args, **kwargs)
 
   return decorated
